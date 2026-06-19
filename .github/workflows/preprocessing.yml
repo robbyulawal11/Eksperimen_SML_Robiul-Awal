@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
@@ -26,15 +26,12 @@ jobs:
 
       - name: Run preprocessing script
         run: |
-          cd preprocessing
-          python automate_Robiul-Awal.py
-          mkdir -p inflow_preprocessing
-          mv ../dataset/*.csv inflow_preprocessing/
-
-      - name: Commit and push changes
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add preprocessing/inflow_preprocessing/
-          git commit -m "Auto-update preprocessed dataset" || echo "No changes to commit"
-          git push
+          # Jalankan dari root agar direktori 'dataset/' terbaca
+          python preprocessing/automate_Robiul-Awal.py
+          
+      - name: Upload Processed Dataset as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: preprocessed-dataset
+          path: dataset/*.csv
+          retention-days: 7
