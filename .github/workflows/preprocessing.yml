@@ -33,5 +33,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: preprocessed-dataset
-          path: dataset/*.csv
+          path: preprocessing/inflow_preprocessing/*.csv
           retention-days: 7

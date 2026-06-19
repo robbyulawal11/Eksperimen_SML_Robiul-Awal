@@ -87,11 +87,13 @@ def main(file_path, target_columns=["INFLOW"]):
         y_train_2d = y_train.reshape(y_train.shape[0], -1)
         y_test_2d = y_test.reshape(y_test.shape[0], -1)
 
-        pd.DataFrame(X_train_2d).to_csv("dataset/X_train.csv", index=False)
-        pd.DataFrame(X_test_2d).to_csv("dataset/X_test.csv", index=False)
-        pd.DataFrame(y_train_2d).to_csv("dataset/y_train.csv", index=False)
-        pd.DataFrame(y_test_2d).to_csv("dataset/y_test.csv", index=False)
-        print("The preprocessing result data has been saved")
+        import os
+        os.makedirs("preprocessing/inflow_preprocessing", exist_ok=True)
+        pd.DataFrame(X_train_2d).to_csv("preprocessing/inflow_preprocessing/X_train.csv", index=False)
+        pd.DataFrame(X_test_2d).to_csv("preprocessing/inflow_preprocessing/X_test.csv", index=False)
+        pd.DataFrame(y_train_2d).to_csv("preprocessing/inflow_preprocessing/y_train.csv", index=False)
+        pd.DataFrame(y_test_2d).to_csv("preprocessing/inflow_preprocessing/y_test.csv", index=False)
+        print("The preprocessing result data has been saved to preprocessing/inflow_preprocessing")
 
 
 if __name__ == "__main__":
