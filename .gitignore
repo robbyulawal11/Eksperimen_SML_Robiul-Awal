@@ -1,4 +1,3 @@
 /venv
-X_*.csv
-y_*.csv
+
 scaler_INFLOW.pkl
